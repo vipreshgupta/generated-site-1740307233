@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prakhar Mistri - Affordable Construction Services</title>
+  <meta name="description" content="Prakhar Mistri offers affordable construction services with a focus on quality and reliability. Book an appointment today!">
+  <style>
+    /* CSS Styles */
+    :root {
+      --navy-blue: #1A237E;
+      --forest-green: #2E7D32;
+      --sunflower-yellow: #FFEB3B;
+      --coral-orange: #FF7043;
+      --light-gray: #F5F5F5;
+      --dark-gray: #424242;
+      --text-color: #333;
+      --background-color: #fff;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    body.dark-mode {
+      --text-color: #eee;
+      --background-color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--navy-blue);
+      color: #fff;
+      padding: 10px 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--sunflower-yellow);
+    }
+
+    #theme-toggle {
+      background-color: var(--sunflower-yellow);
+      color: var(--navy-blue);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s, color 0.3s;
+      margin-right: 20px;
+    }
+
+    #theme-toggle:hover {
+      background-color: var(--coral-orange);
+      color: #fff;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 20px;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 3px 0;
+      transition: 0.4s;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px 50px;
+      background-color: var(--light-gray);
+    }
+
+    .hero img {
+      max-width: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5em;
+      color: var(--navy-blue);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      color: var(--forest-green);
+      margin-bottom: 30px;
+    }
+
+    .cta-button {
+      background-color: var(--coral-orange);
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      background-color: var(--sunflower-yellow);
+      color: var(--navy-blue);
+    }
+
+    .about {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .about p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+
+    .gallery {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .gallery h2 {
+      color: var(--navy-blue);
+      margin-bottom: 30px;
+    }
+
+    .image-slider {
+      display: flex;
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+
+    .image-slider img {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      max-width: 80%;
+      max-height: 80%;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+    }
+
+    .appointment {
+      position: fixed;
+      right: 20px;
+      top: 80px;
+      background-color: var(--forest-green);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      width: 250px;
+    }
+
+    .appointment h2 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+    }
+
+    .time-slot {
+      background-color: var(--sunflower-yellow);
+      color: var(--navy-blue);
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .time-slot:hover {
+      background-color: var(--coral-orange);
+      color: #fff;
+    }
+
+    .booking-form {
+      margin-top: 20px;
+    }
+
+    .booking-form input[type="text"],
+    .booking-form input[type="email"],
+    .booking-form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--navy-blue);
+      box-sizing: border-box;
+    }
+
+    .booking-form button {
+      background-color: var(--coral-orange);
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .booking-form button:hover {
+      background-color: var(--sunflower-yellow);
+      color: var(--navy-blue);
+    }
+
+    footer {
+      background-color: var(--dark-gray);
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    footer p {
+      margin-bottom: 10px;
+    }
+
+    .social-links a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    .social-links a:hover {
+      color: var(--sunflower-yellow);
+    }
+
+    .testimonials {
+      margin-top: 20px;
+    }
+
+    .testimonial {
+      background-color: var(--light-gray);
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .testimonial p {
+      font-style: italic;
+    }
+
+    .testimonial cite {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        display: none;
+        background-color: var(--navy-blue);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      nav ul li {
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .hamburger {
+        display: flex;
+        margin-left: 20px;
+      }
+
+      .appointment {
+        position: fixed;
+        top: auto;
+        bottom: 20px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+      }
+
+      .image-slider {
+        flex-wrap: nowrap;
+      }
+
+      .image-slider img {
+        width: 250px;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="theme-toggle">Toggle Theme</button>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <img src="https://via.placeholder.com/200" alt="Prakhar Mistri Cartoon" id="prakhar-cartoon">
+      <h1>Prakhar Mistri</h1>
+      <p>Affordable Construction Services at Minimal Costs</p>
+      <a href="#contact" class="cta-button">Book an Appointment</a>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container">
+      <h2>About Prakhar</h2>
+      <p>
+        Prakhar Mistri is an adopted Bihari with a passion for construction. He is urgently seeking monthly employment
+        to support his livelihood. With years of experience and a commitment to quality, Prakhar offers reliable
+        and affordable construction services.
+      </p>
+    </div>
+  </section>
+
+  <section id="services" class="gallery">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p>Examples of bad constructions to avoid:</p>
+      <div class="image-slider">
+        <img src="https://via.placeholder.com/300x200" alt="Bad Construction 1" onclick="openModal(this.src)">
+        <img src="https://via.placeholder.com/300x200" alt="Bad Construction 2" onclick="openModal(this.src)">
+        <img src="https://via.placeholder.com/300x200" alt="Bad Construction 3" onclick="openModal(this.src)">
+        <!-- Add more images as needed -->
+      </div>
+    </div>
+  </section>
+
+  <div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="img01">
+  </div>
+
+  <section id="contact" class="appointment">
+    <h2>Book an Appointment</h2>
+    <div class="time-slots">
+      <div class="time-slot" data-time="09:00-11:00">09:00-11:00</div>
+      <div class="time-slot" data-time="11:00-13:00">11:00-13:00</div>
+      <div class="time-slot" data-time="13:00-15:00">13:00-15:00</div>
+      <div class="time-slot" data-time="15:00-17:00">15:00-17:00</div>
+      <div class="time-slot" data-time="17:00-19:00">17:00-19:00</div>
+    </div>
+    <form class="booking-form" id="bookingForm">
+      <input type="text" placeholder="Your Name" required aria-label="Your Name">
+      <input type="email" placeholder="Your Email" required aria-label="Your Email">
+      <input type="text" placeholder="Selected Time" id="selectedTime" readonly aria-label="Selected Time">
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Contact Information: +91-XXX-XXX-XXXX</p>
+      <p>Email: prakhar.mistri@example.com</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+      </div>
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>"Prakhar did an excellent job on our home renovation. Highly recommended!"</p>
+          <cite>Client Name 1</cite>
+        </div>
+        <div class="testimonial">
+          <p>"Very professional and affordable. Will definitely hire again."</p>
+          <cite>Client Name 2</cite>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // JavaScript for Theme Toggle, Appointment Booking, Interactive Elements
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    // Hamburger Menu
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.getElementById('main-nav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Appointment Booking
+    const timeSlots = document.querySelectorAll('.time-slot');
+    const selectedTimeInput = document.getElementById('selectedTime');
+    const bookingForm = document.getElementById('bookingForm');
+
+    timeSlots.forEach(slot => {
+      slot.addEventListener('click', () => {
+        timeSlots.forEach(s => s.classList.remove('selected'));
+        slot.classList.add('selected');
+        selectedTimeInput.value = slot.dataset.time;
+      });
+    });
+
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (selectedTimeInput.value) {
+        alert('Booking confirmed for ' + selectedTimeInput.value + '. Thank you!');
+        // Optional: Send email confirmation here
+      } else {
+        alert('Please select a time slot.');
+      }
+    });
+
+    // Image Modal
+    function openModal(src) {
+      const modal = document.getElementById('myModal');
+      const modalImg = document.getElementById('img01');
+      modal.style.display = 'flex';
+      modalImg.src = src;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'none';
+    }
+
+    // Placeholder image replacement (replace with actual image URLs)
+    document.getElementById('prakhar-cartoon').src = 'https://via.placeholder.com/200'; // Replace with cartoon image URL
+    const galleryImages = document.querySelectorAll('.image-slider img');
+    galleryImages.forEach((img, index) => {
+      img.src = `https://via.placeholder.com/300x200?text=Bad+Construction+${index + 1}`; // Replace with actual image URLs
+    });
+  </script>
+</body>
+</html>
